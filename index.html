@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EmberEye Alerts — SMS enrollment</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<header><div class="brand">Ember<span>Eye</span> Alerts · EmberEye</div></header>
+
+<h1>Enroll your phone for EmberEye safety alerts</h1>
+<p>EmberEye is a fire-detection system installed at your own property. Enrolling your mobile number lets your EmberEye hub text you when it detects a possible fire, when an alert is resolved, and when the system is armed or disarmed. Alerts are sent only to the owner or authorized contacts of the protected property.</p>
+
+<form id="optin" class="card" onsubmit="return submitForm(event)">
+  <label for="name">Your name</label>
+  <input id="name" type="text" required autocomplete="name" placeholder="Jane Owner">
+
+  <label for="site">Protected property (site name or address)</label>
+  <input id="site" type="text" required placeholder="Cabin, 123 Ridge Rd">
+
+  <label for="phone">Mobile number</label>
+  <input id="phone" type="tel" required autocomplete="tel" placeholder="+1 510 555 0100" pattern="^\+?[0-9 ()\-]{10,20}$">
+
+  <label class="consent"><input id="consent" type="checkbox" required>
+    <span>I agree to receive automated safety alert text messages from EmberEye (EmberEye) at the number provided, including fire-detection alerts, alert resolutions, and system status changes. Message frequency varies by activity at my property (typically 0–10 messages per month, more during an incident). Message and data rates may apply. Reply <strong>STOP</strong> to cancel at any time or <strong>HELP</strong> for help. Consent is not a condition of purchase. See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms &amp; Conditions</a>.</span>
+  </label>
+
+  <button type="submit">Enroll this number</button>
+  <p class="muted"><small>Your number is stored on your own EmberEye hub and used only to send you these alerts.</small></p>
+</form>
+
+<div id="done" class="card hidden">
+  <h2>You're enrolled</h2>
+  <p>Thanks, <span id="done-name"></span>. We've recorded <strong id="done-phone"></strong> for alerts from the EmberEye system at <span class="done-site"></span>.</p>
+  <p>You will receive a confirmation text shortly:</p>
+  <p class="card"><em>EmberEye Alerts: You're enrolled for safety alerts from your EmberEye system at <span class="done-site"></span>. Msg frequency varies. Msg &amp; data rates may apply. Reply HELP for help, STOP to cancel.</em></p>
+  <p class="muted"><small>Didn't get it within a few minutes? Check that the number is correct, then contact <a href="mailto:conormccaulley@gmail.com">conormccaulley@gmail.com</a>.</small></p>
+</div>
+
+<footer>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms &amp; Conditions</a>
+  <a href="mailto:conormccaulley@gmail.com">Contact</a>
+  <div>© 2026 EmberEye. EmberEye is a product of EmberEye.</div>
+</footer>
+</main>
+<script>
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('done-name').textContent=document.getElementById('name').value;
+  document.getElementById('done-phone').textContent=document.getElementById('phone').value;
+  document.querySelectorAll('.done-site').forEach(function(el){el.textContent=document.getElementById('site').value;});
+  document.getElementById('optin').classList.add('hidden');
+  document.getElementById('done').classList.remove('hidden');
+  window.scrollTo(0,0);
+  return false;
+}
+</script>
+</body>
+</html>
